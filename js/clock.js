@@ -39,6 +39,40 @@ function hexClock() {
 hexClock();
 setInterval(hexClock, 1000);
 
-var getTime = (type1) => {
-  return moment().format('h:mm:ss a')
+// Function for analog clock
+function analogClock() {
+  var date = new Date;
+  var seconds = date.getSeconds();
+  var minutes = date.getMinutes();
+  var hours = date.getHours();
+
+  // create an object array with each hand and its degrees
+  var hands = [
+    {
+      hand: 'hours',
+      angle: (hours * 30) + (minutes/2)
+    },
+    {
+      hand: 'minutes',
+      angle: (minutes * 6)
+    },
+    {
+      hand: 'seconds',
+      angle: (seconds * 6)
+    }
+  ];
+  // Create a loop to set the angle of the hands
+  for (var j = 0; j < hands.length; j++) {
+    var elements = document.querySelectorAll('#' + hands[j].hand);
+    for (var k = 0; k < elements.length; k++) {
+      elements[k].style.webkitTransform = 'rotateZ(' + hands[j].angle + 'deg)';
+      elements[k].style.transform = 'rotateZ(' + hands[j].angle + 'deg)';
+      // if this is a minute hand, it notes the seconds position and calculates minutes later
+      if (hands[j].hand === 'minutes') {
+        elements[k].parentNode.setAttribute('data-second-angle', hands[j + 1].angle);
+      }
+    }
+  }
 }
+
+analogClock();
