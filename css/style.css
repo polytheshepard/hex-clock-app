@@ -24,7 +24,7 @@ h1 {
   background: url(../img/clock.svg) no-repeat center;
   background-size: 90%;
   position: relative;
-  border-radius: 100%;
+  border-radius: 50%;
   border: 10px solid #fff;
   width: 400px;
   height: 400px;
