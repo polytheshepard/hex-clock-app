@@ -75,4 +75,56 @@ function analogClock() {
   }
 }
 
+// Sets the minute hand movement in its first minute to move after it hits zero minute mark
+function setupMinuteHands() {
+  var containers = document.querySelectorAll('.minutes-container');
+  var secondAngle = containers[0].getAttribute("data-second-angle");
+  if(secondAngle > 0) {
+    // sets a timeout until the end of the current minute, then it moves the hand
+    var delay = (((360 - secondAngle) / 6) + 0.1) * 1000;
+    setTimeout(function() {
+      moveMinuteHands(containers);
+    }, delay);
+  }
+}
+
+// Moves the first minute hands rotation
+function moveMinuteHands(containers) {
+  for (var i = 0; i < containers.length; i++) {
+    containers[i].style.webkitTransform = 'rotateZ(6deg)';
+    containers[i].style.transform = 'rotateZ(6deg)';
+  }
+  // After the first minute hand moves, we continue with 60 second interval
+  setInterval(function() {
+    for (var i = 0; i < containers.length; i++) {
+      if(containers[i].angle === undefined) {
+        containers[i].angle = 12;
+      } else {
+        containers[i].angle += 6;
+      }
+      containers[i].style.webkitTransform ='rotateZ(' + containers[i].angle + 'deg)';
+      containers[i].style.transform = 'rotateZ(' + containers[i].angle + 'deg)';
+    }
+  }, 60000);
+}
+
+// Moves the second hand containers
+function moveSecondHands() {
+  var containers = document.querySelectorAll('.seconds-container');
+  setInterval(function() {
+    for (var i = 0; i < containers.length; i++) {
+      if(containers[i].angle === undefined) {
+        containers[i].angle = 6;
+      } else {
+        containers[i].angle += 6;
+      }
+      containers[i].style.webkitTransform = 'rotateZ(' + containers[i].angle + 'deg)';
+      containers[i].style.transform = 'rotateZ(' + containers[i].angle + 'deg)';
+    }
+  }, 1000);
+}
+
+setupMinuteHands();
+moveMinuteHands(setupMinuteHands);
+moveSecondHands();
 analogClock();
