@@ -1,0 +1,27 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 100px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.6);
+}
+
+#clock {
+  font-weight: 300;
+  font-size: 5em;
+  letter-spacing: 20px;
+}
+
+#hex-colour {
+  font-size: 2em;
+}
+
+#analog-clock {
+  border-radius: 100%;
+  border: 10px solid #fff;
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.6),
+              inset 2px 2px 8px rgba(0,0,0,0.6);
+}
